@@ -1,0 +1,6 @@
+[28-Feb-2024 12:19:47 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'winnerdb.categories' doesn't exist in /home/b9j4trlrnpip/public_html/winnerapp/api/category/categories.php:46
+Stack trace:
+#0 /home/b9j4trlrnpip/public_html/winnerapp/api/category/categories.php(46): mysqli->query()
+#1 /home/b9j4trlrnpip/public_html/winnerapp/api/category/category.php(16): getAllCategories()
+#2 {main}
+  thrown in /home/b9j4trlrnpip/public_html/winnerapp/api/category/categories.php on line 46
