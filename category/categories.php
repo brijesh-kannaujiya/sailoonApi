@@ -1,17 +1,24 @@
 <?php
 include '../dbconnection/db_functions.php';
+include('../token/Token.php');
 
+const KEY = 'winnerthisisaapkey';
+$token = apache_request_headers()['Authorization'];
+$payload = Token::Verify($token, KEY);
+if ($payload == false) {
+    echo json_encode(array('status' => 'false', 'message' => 'Session expired'));
+}
 
 function gen_uuid()
 {
     return strtolower(sprintf(
-        '%04x%04x-%04x-%04x-%04x1%0X-%04x%04x%04x', 
+        '%04x%04x-%04x-%04x-%04x1%0X-%04x%04x%04x',
         mt_rand(0, 0xffff),
-        mt_rand(0, 0xffff), 
-        mt_rand(0, 0xffff), 
-        mt_rand(0, 0x0fff) | 0x4000, 
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000,
         mt_rand(0, 0x3fff) | 0x8000,
-        time(), 
+        time(),
         mt_rand(0, 0xffff),
         mt_rand(0, 0xffff),
         mt_rand(0, 0xffff)
@@ -19,7 +26,8 @@ function gen_uuid()
 }
 
 // Create category
-function createCategory($name, $status, $name_ar) {
+function createCategory($name, $status, $name_ar)
+{
     if (empty($name)) {
         return ['status' => 'error', 'message' => 'Name is required.'];
     }
@@ -40,29 +48,31 @@ function createCategory($name, $status, $name_ar) {
 }
 
 // Read all categories
-function getAllCategories($uuid) {
+function getAllCategories($uuid)
+{
     $conn = connectToDatabase();
-    if($uuid != null){
+    if ($uuid != null) {
         $sql = "SELECT * FROM categories where uuid = '$uuid'";
-    }else{
+    } else {
         $sql = "SELECT * FROM categories";
     }
     $result = $conn->query($sql);
 
     $categories = [];
-    if($uuid != null){
+    if ($uuid != null) {
         $categories = $result->fetch_assoc();
     } else {
         while ($row = $result->fetch_assoc()) {
             $categories[] = $row;
         }
-    } 
-    return ['status' => 'success', 'categories' =>$categories];
+    }
+    return ['status' => 'success', 'categories' => $categories];
 }
 
 // Update category
-function updateCategory($uuid, $name, $status, $name_ar) {
-    
+function updateCategory($uuid, $name, $status, $name_ar)
+{
+
     // Basic validation for UUID
     if (empty($uuid)) {
         return ['status' => 'error', 'message' => 'UUID is required for update.'];
@@ -71,7 +81,7 @@ function updateCategory($uuid, $name, $status, $name_ar) {
     // Validation for the 'name' field
     if (empty($name)) {
         return ['status' => 'error', 'message' => 'Name is required for update.'];
-    } 
+    }
 
     // Validation for the 'status' field
     if ($status == '') {
@@ -94,7 +104,8 @@ function updateCategory($uuid, $name, $status, $name_ar) {
 }
 
 // Delete category
-function deleteCategory($uuid) {
+function deleteCategory($uuid)
+{
     if (empty($uuid)) {
         return ['status' => 'error', 'message' => 'Invalid UUID for deletion.'];
     }
@@ -106,4 +117,3 @@ function deleteCategory($uuid) {
         return ['status' => 'error', 'message' => 'Error deleting category: ' . $conn->error];
     }
 }
-?>
