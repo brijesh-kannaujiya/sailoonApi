@@ -48,10 +48,15 @@ function getAllCategories($uuid) {
         $sql = "SELECT * FROM categories";
     }
     $result = $conn->query($sql);
+
     $categories = [];
-    while ($row = $result->fetch_assoc()) {
-        $categories[] = $row;
-    }
+    if($uuid != null){
+        $categories = $result->fetch_assoc();
+    } else {
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row;
+        }
+    } 
     return ['status' => 'success', 'categories' =>$categories];
 }
 

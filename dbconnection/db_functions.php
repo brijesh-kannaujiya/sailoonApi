@@ -6,10 +6,20 @@ function connectToDatabase() {
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
 
-    $dbhost = "localhost";
-    $dbuser = "winnerdb_user";
-    $dbpass = "&?sDDMm9=7[^";
-    $db = "winnerdb";
+ 
+
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        $dbhost = "localhost";
+        $dbuser = "root";
+        $dbpass = "Brijesh@123";
+        $db = "winnerdb";
+    }else{
+        $dbhost = "localhost";
+        $dbuser = "winnerdb_user";
+        $dbpass = "&?sDDMm9=7[^";
+        $db = "winnerdb";
+    }
+    
 
     $con = mysqli_connect($dbhost, $dbuser, $dbpass, $db);
 
