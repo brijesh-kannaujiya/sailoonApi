@@ -26,9 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cp_product_name_ar = isset($_POST['cp_product_name_ar']) ? $_POST['cp_product_name_ar'] : null;
     $product_image = isset($_FILES["avatar_product"]) ? $_FILES["avatar_product"] : null;
     $deal_image = isset($_FILES["avatar"]) ? $_FILES["avatar"] : null;
+    $category_id = isset($_POST["category_id"]) ? $_POST["category_id"] : null;
     // $cp_product_price = isset($_POST['cp_product_price']) ? $_POST['cp_product_price'] : null;
 
-    $result = createCategory($cp_name, $cp_name_ar, $dealprice, $shortdiscription, $longdiscription, $shortdiscription_ar, $longdiscription_ar, $cp_product_name, $cp_product_name_ar, $tagtitle, $joindeal_count, $deal_startdate, $deal_enddate, $cp_status, $product_image, $deal_image, $cp_product_price);
+    $result = createCategory($cp_name, $cp_name_ar, $dealprice, $shortdiscription, $longdiscription, $shortdiscription_ar, $longdiscription_ar, $cp_product_name, $cp_product_name_ar, $tagtitle, $joindeal_count, $deal_startdate, $deal_enddate, $cp_status, $product_image, $deal_image, $cp_product_price, $category_id);
 
     header('Content-Type: application/json');
     echo json_encode($result);

@@ -50,7 +50,7 @@ function uploadFile($file, $uploadDir)
 }
 
 
-function createCategory($cp_name, $cp_name_ar, $dealprice, $shortdiscription, $longdiscription, $shortdiscription_ar, $longdiscription_ar, $cp_product_name, $cp_product_name_ar, $tagtitle, $joindeal_count, $deal_startdate, $deal_enddate, $cp_status, $product_image, $deal_image, $cp_product_price)
+function createCategory($cp_name, $cp_name_ar, $dealprice, $shortdiscription, $longdiscription, $shortdiscription_ar, $longdiscription_ar, $cp_product_name, $cp_product_name_ar, $tagtitle, $joindeal_count, $deal_startdate, $deal_enddate, $cp_status, $product_image, $deal_image, $cp_product_price, $category_id)
 {
     if (empty($cp_name)) {
         return ['status' => 'error', 'message' => 'Campaign name is required.'];
@@ -120,11 +120,15 @@ function createCategory($cp_name, $cp_name_ar, $dealprice, $shortdiscription, $l
         return ['status' => 'error', 'message' => 'Product Price is required.'];
     }
 
+    if (empty($category_id)) {
+        return ['status' => 'error', 'message' => 'Category is required.'];
+    }
+
     $deal_image = uploadFile($_FILES["avatar"], 'deal_image/')['url'];
     $product_image = uploadFile($_FILES["avatar_product"], 'deal_image_product/')['url'];
 
-    $sql = "INSERT INTO campains (cp_name,cp_name_ar ,image_name, dealprice,shortdiscription,longdiscription,product_name,product_image,product_price,tagtitle,joindeal_count,deal_startdate,deal_enddate,cp_status,shortdiscription_ar,longdiscription_ar,cp_product_name_ar)
-    VALUES ('$cp_name','$cp_name_ar','$deal_image','$dealprice', '$shortdiscription', '$longdiscription','$cp_product_name','$product_image','$cp_product_price','$tagtitle','$joindeal_count','$deal_startdate','$deal_enddate','$cp_status','$shortdiscription_ar','$longdiscription_ar','$cp_product_name_ar')";
+    $sql = "INSERT INTO campains (cp_name,cp_name_ar ,image_name, dealprice,shortdiscription,longdiscription,product_name,product_image,product_price,tagtitle,joindeal_count,deal_startdate,deal_enddate,cp_status,shortdiscription_ar,longdiscription_ar,cp_product_name_ar,category_id)
+    VALUES ('$cp_name','$cp_name_ar','$deal_image','$dealprice', '$shortdiscription', '$longdiscription','$cp_product_name','$product_image','$cp_product_price','$tagtitle','$joindeal_count','$deal_startdate','$deal_enddate','$cp_status','$shortdiscription_ar','$longdiscription_ar','$cp_product_name_ar','$category_id')";
     $conn = connectToDatabase();
     if ($conn->query($sql) === TRUE) {
         return ['status' => 'success', 'message' => 'Campains Create successfully'];
