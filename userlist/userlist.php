@@ -20,8 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // Handle requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = isset($_POST['id']) ? $_POST['id'] : null;
-    $status = isset($_POST['status']) ? $_POST['status'] : null;
+    $put_data = file_get_contents("php://input");
+    $put_vars = json_decode($put_data, true);
+    $id = isset($put_vars['id']) ? $put_vars['id'] : null;
+    $status = isset($put_vars['status']) ? $put_vars['status'] : null;
     $result = StatusChange($id, $status);
     header('Content-Type: application/json');
     echo json_encode($result);
