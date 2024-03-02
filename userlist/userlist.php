@@ -4,6 +4,11 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
 include 'users.php';
+include('../Helper.php');
+
+
+TokenVerify();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $uuid = isset($_GET['uuid']) ? $_GET['uuid'] : null;
@@ -13,16 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
-
 // Handle requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = isset($_POST['name']) ? $_POST['name'] : null;
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
     $status = isset($_POST['status']) ? $_POST['status'] : null;
-    $name_ar = isset($_POST['name_ar']) ? $_POST['name_ar'] : null;
-    //$result = createCategory($name, $status, $name_ar);
-    //header('Content-Type: application/json');
-    //echo json_encode($result);
+    $result = StatusChange($id, $status);
+    header('Content-Type: application/json');
+    echo json_encode($result);
     exit;
 }
-
-
