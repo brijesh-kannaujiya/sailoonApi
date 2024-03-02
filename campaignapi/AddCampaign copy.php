@@ -10,7 +10,7 @@ include('../dbconnection/dbconn.php');
 //$queryresult = array();
 //$payload = Token::Verify($token, KEY);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name  =         $_POST['cp_name']; 
+    $name  =         $_POST['cp_name'];
     $dealprice  =  $_POST['cp_price'];
     $shortdiscription  =  $_POST['cp_shortdiscription'];
     $longdiscription  =     $_POST['cp_longdiscription'];
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $joindeal_count  =      $_POST['cp_joindeal_count'];
     $deal_startdate  =      $_POST['cp_startdate'];
     $deal_enddate  =      $_POST['cp_enddate'];
-    $status  =      $_POST['cp_status']; 
+    $status  =      $_POST['cp_status'];
     echo json_encode(array('status' => 'success', 'message' => $name));
     // Check if an image file is uploaded
     // if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // }
 
     // Insert user data into the database
-    $sql = "INSERT INTO createcampains (name, image, dealprice,shortdiscription,longdiscription,tagtitle,joindeal_count,deal_startdate,deal_enddate,status) VALUES (?, ?, ?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO campains (name, image, dealprice,shortdiscription,longdiscription,tagtitle,joindeal_count,deal_startdate,deal_enddate,status) VALUES (?, ?, ?,?,?,?,?,?,?,?)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param($name,'iiiiii',$dealprice, $shortdiscription, $longdiscription,$tagtitle,$joindeal_count,$deal_startdate,$deal_enddate,$status);
-    
+    $stmt->bind_param($name, 'iiiiii', $dealprice, $shortdiscription, $longdiscription, $tagtitle, $joindeal_count, $deal_startdate, $deal_enddate, $status);
+
     if ($stmt->execute()) {
         // User insertion successful
         echo json_encode(array('status' => 'success', 'message' => 'insert successfully'));
@@ -48,6 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Invalid request method
     echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
 }
-
- 
-?>

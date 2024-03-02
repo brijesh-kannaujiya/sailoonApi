@@ -43,7 +43,7 @@ if ($payload == false) {
         }
 
 
-        $sql = "INSERT INTO createcampains (cp_name,cp_name_ar ,image_name, dealprice,shortdiscription,longdiscription,product_name,product_image,product_price,tagtitle,joindeal_count,deal_startdate,deal_enddate,cp_status)
+        $sql = "INSERT INTO campains (cp_name,cp_name_ar ,image_name, dealprice,shortdiscription,longdiscription,product_name,product_image,product_price,tagtitle,joindeal_count,deal_startdate,deal_enddate,cp_status)
  VALUES ('$cp_name','$cp_name_ar','$deal_image_update_url','$dealprice', '$shortdiscription', '$longdiscription','$cp_product_name','$deal_product_image_update_url','$cp_product_price','$tagtitle','$joindeal_count','$deal_startdate','$deal_enddate','$cp_status')";
 
         if (mysqli_query($con, $sql)) {

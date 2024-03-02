@@ -53,9 +53,9 @@ function getAllUser($uuid)
 {
     $conn = connectToDatabase();
     if ($uuid != null) {
-        $sql = "SELECT * FROM tblusers where uuid = '$uuid'";
+        $sql = "SELECT * FROM users where uuid = '$uuid'";
     } else {
-        $sql = "SELECT * FROM tblusers";
+        $sql = "SELECT * FROM users";
     }
     $result = $conn->query($sql);
 

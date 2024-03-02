@@ -54,7 +54,7 @@ if ($payload == false) {
         } else {
             $deal_product_image_update_url =   $campaignData['product_image'];
         }
-        $sql = "UPDATE createcampains SET cp_name='$cp_name', cp_name_ar='$cp_name_ar', image_name='$deal_image_update_url', dealprice='$dealprice'
+        $sql = "UPDATE campains SET cp_name='$cp_name', cp_name_ar='$cp_name_ar', image_name='$deal_image_update_url', dealprice='$dealprice'
             , shortdiscription='$shortdiscription', longdiscription='$longdiscription', product_name='$cp_product_name',product_image='$deal_product_image_update_url',product_price='$cp_product_price',
               tagtitle='$tagtitle'
             , joindeal_count='$joindeal_count', deal_startdate='$deal_startdate', deal_enddate='$deal_enddate',upatedDateAt='$upatedDateAt'
