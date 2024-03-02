@@ -7,6 +7,7 @@ $token = apache_request_headers()['Authorization'];
 $payload = Token::Verify($token, KEY);
 if ($payload == false) {
     echo json_encode(array('status' => 'false', 'message' => 'Session expired'));
+    exit();
 }
 
 function gen_uuid()
