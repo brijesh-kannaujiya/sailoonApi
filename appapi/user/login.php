@@ -47,7 +47,7 @@ if ($payload == false) {
 				$queryresult['error'] = 'User not exist';
 			}
 		} else {
-			$query_up = "UPDATE `users` SET `otpval` = '$otp' WHERE mobile='$user_mobile'";
+			$query_up = "UPDATE `users` SET `otpval` = '$otp',`device_id` = '$device_id' WHERE mobile='$user_mobile'";
 			mysqli_query($con, $query_up);
 			$query = "SELECT * FROM users WHERE mobile='$user_mobile'";
 			$resultopstatus = mysqli_query($con, $query);
